@@ -3,6 +3,7 @@
 
 # pa_discover_osm.py
 import json, requests
+import os, os.path
 
 OVERPASS_URLS = [
     "https://overpass-api.de/api/interpreter",
@@ -63,8 +64,9 @@ if __name__ == "__main__":
     raw = get_pa_libraries()
     seed = normalize(raw)
     
-    outfolder = "data/elibrary"
+    outfolder = "../../data/elibrary"
+    if not os.path.exists(outfolder):
+        os.makedirs(outfolder)
     with open(f"{outfolder}/pa_libraries_seed.json", "w", encoding="utf-8") as f:
         json.dump(seed, f, indent=2, ensure_ascii=False)
     print(f"Saved {len(seed)} libraries to pa_libraries_seed.json")
-

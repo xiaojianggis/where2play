@@ -21,7 +21,6 @@ HEADERS = {
     "Accept": "application/json,text/html"
 }
 
-
 def try_libcal(events_url):
     parsed = urlparse(events_url)
     base = f"{parsed.scheme}://{parsed.netloc}"
@@ -665,11 +664,12 @@ def is_valid_http_url(url: str) -> bool:
 
 if __name__ == "__main__":
     import os, os.path
-    outfolder = 'data/events/pa'
-    if not os.path.exists(outfolder): os.makedirs(outfolder)
 
-    library_file = os.path.join('data/elibrary/pa_libraries_seed.json')
-    upevent_url_file = os.path.join('data/elibrary/upcoming_events_url.json')
+    root = '../../data/elibrary'
+    outfolder = f'../../data/events'
+
+    library_file = f'{root}/pa_libraries_enriched.json'
+    upevent_url_file = f'{root}/upcoming_events_url.json'
 
     # the first try of scape upcoming events, the results may be comple or neeed to further scrape
     events_json_folder = os.path.join(outfolder, 'library_events')
@@ -678,7 +678,7 @@ if __name__ == "__main__":
     # the final complete events json res
     final_event_json_folder = os.path.join(outfolder, 'event_jsons')
     if not os.path.exists(final_event_json_folder): os.makedirs(final_event_json_folder)
-
+    
     ##-------------Step 1: get the url of upcoming events for all libraries------------
     # library_file = os.path.join('data/elibrary/pa_libraries_seed_small.json')
     # upevent_url_file = os.path.join('data/elibrary/upcoming_events_url_small.json')
